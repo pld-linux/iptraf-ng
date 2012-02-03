@@ -5,15 +5,14 @@ Summary(pt_BR.UTF-8):	Ferramenta baseada no console para monitoração de rede
 Summary(ru.UTF-8):	IPTraf - консольная программа мониторинга сетевого траффика
 Summary(uk.UTF-8):	IPTraf - консольна програма моніторингу трафіку в мережі
 Name:		iptraf-ng
-Version:	1.0.2
+Version:	1.1.1
 Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	https://fedorahosted.org/releases/i/p/iptraf-ng/%{name}-%{version}.tar.gz
-# Source0-md5:	b2adbbbee4c269fb97a1951981c9047c
+# Source0-md5:	a48c30c186aafc1e8921b611236b732b
 URL:		https://fedorahosted.org/iptraf-ng/
 BuildRequires:	ncurses-ext-devel >= 5.4
-Obsoletes:	iptraf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -70,7 +69,7 @@ SLIP/PPP.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/var/{lib,log}/iptraf
+install -d $RPM_BUILD_ROOT/var/{lib,log}/iptraf-ng
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -82,10 +81,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES FAQ README* RELEASE*
 %doc Documentation/*.{html,png}
-%attr(755,root,root) %{_sbindir}/iptraf
-%attr(755,root,root) %{_sbindir}/rawtime
-%attr(755,root,root) %{_sbindir}/rvnamed
-%attr(755,root,root) %{_libdir}/libtextbox.so
-%attr(750,root,root) %dir /var/lib/iptraf
-%attr(750,root,root) %dir /var/log/iptraf
+%attr(755,root,root) %{_sbindir}/iptraf-ng
+%attr(755,root,root) %{_sbindir}/rvnamed-ng
+%attr(750,root,root) %dir /var/lib/iptraf-ng
+%attr(750,root,root) %dir /var/log/iptraf-ng
 %{_mandir}/man*/*
