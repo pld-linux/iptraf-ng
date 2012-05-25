@@ -5,12 +5,12 @@ Summary(pt_BR.UTF-8):	Ferramenta baseada no console para monitoração de rede
 Summary(ru.UTF-8):	IPTraf - консольная программа мониторинга сетевого траффика
 Summary(uk.UTF-8):	IPTraf - консольна програма моніторингу трафіку в мережі
 Name:		iptraf-ng
-Version:	1.1.1
+Version:	1.1.3.1
 Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	https://fedorahosted.org/releases/i/p/iptraf-ng/%{name}-%{version}.tar.gz
-# Source0-md5:	a48c30c186aafc1e8921b611236b732b
+# Source0-md5:	1a2c02944b0b012d6a3de96207610fa2
 URL:		https://fedorahosted.org/iptraf-ng/
 BuildRequires:	ncurses-ext-devel >= 5.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
