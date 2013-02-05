@@ -12,6 +12,8 @@ Group:		Networking/Utilities
 Source0:	https://fedorahosted.org/releases/i/p/iptraf-ng/%{name}-%{version}.tar.gz
 # Source0-md5:	1a2c02944b0b012d6a3de96207610fa2
 URL:		https://fedorahosted.org/iptraf-ng/
+Patch0:		%{name}-include.patch
+Patch1:		%{name}-format-security.patch
 BuildRequires:	ncurses-ext-devel >= 5.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -61,6 +63,8 @@ SLIP/PPP.
 %define		_bindir		%{_sbindir}
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 %configure \
