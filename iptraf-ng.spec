@@ -6,7 +6,7 @@ Summary(ru.UTF-8):	IPTraf - консольная программа монито
 Summary(uk.UTF-8):	IPTraf - консольна програма моніторингу трафіку в мережі
 Name:		iptraf-ng
 Version:	1.1.4
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Utilities
 Source0:	https://fedorahosted.org/releases/i/p/iptraf-ng/%{name}-%{version}.tar.gz
