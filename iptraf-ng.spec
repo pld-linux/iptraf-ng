@@ -5,15 +5,16 @@ Summary(pt_BR.UTF-8):	Ferramenta baseada no console para monitoração de rede
 Summary(ru.UTF-8):	IPTraf - консольная программа мониторинга сетевого траффика
 Summary(uk.UTF-8):	IPTraf - консольна програма моніторингу трафіку в мережі
 Name:		iptraf-ng
-Version:	1.1.4
-Release:	2
+Version:	1.2.1
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
-Source0:	https://fedorahosted.org/releases/i/p/iptraf-ng/%{name}-%{version}.tar.gz
-# Source0-md5:	de27cfeeede96e2acfb0edc8439b034a
-Patch0:		%{name}-format-security.patch
-Patch1:		0001-BUGFIX-fix-Floating-point-exception-in-tcplog_flowra.patch
-URL:		https://fedorahosted.org/iptraf-ng/
+Source0:	https://github.com/iptraf-ng/iptraf-ng/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	3e6b425e21c7dc5df35b40799cbfe7dd
+URL:		https://github.com/iptraf-ng/iptraf-ng/
+BuildRequires:	docbook-dtd41-sgml
+BuildRequires:	docbook-utils
+BuildRequires:	ncurses-devel
 BuildRequires:	ncurses-ext-devel >= 5.4
 Obsoletes:	iptraf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -61,16 +62,18 @@ IPTraf - консольна утиліта моніторингу IP-трафі�
 конкретних комп'ютерах. IPTraf працює з інтерфейсами Ethernet та
 SLIP/PPP.
 
-%define		_bindir		%{_sbindir}
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
-%configure \
-	CPPFLAGS="-I/usr/include/ncurses"
-%{__make} V=1
+%{__make} \
+	CC="%{__cc}" \
+	CPPFLAGS="%{rpmcppflags}" \
+	CFLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}" \
+	V=1
+
+%{__make} html
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -78,17 +81,23 @@ install -d $RPM_BUILD_ROOT/var/{lib,log}/iptraf-ng
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	V=1
+	V=1 \
+	prefix="%{_prefix}" \
+	localedir="%{_localedir}" \
+	mandir="%{_mandir}" \
+	sbindir="%{_sbindir}" \
+	sharedir="%{_datadir}" \
+	sysconfdir="%{_sysconfdir}" \
+	lib="%{_lib}"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES FAQ README* RELEASE*
+%doc AUTHORS CHANGES FAQ README*
 %doc Documentation/*.{html,png}
 %attr(755,root,root) %{_sbindir}/iptraf-ng
-%attr(755,root,root) %{_sbindir}/rvnamed-ng
 %attr(750,root,root) %dir /var/lib/iptraf-ng
 %attr(750,root,root) %dir /var/log/iptraf-ng
-%{_mandir}/man*/*
+%{_mandir}/man8/iptraf-ng.8*
