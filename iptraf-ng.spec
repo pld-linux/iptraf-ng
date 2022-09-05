@@ -70,14 +70,15 @@ SLIP/PPP.
 %build
 %configure \
 	CPPFLAGS="-I/usr/include/ncurses"
-%{__make}
+%{__make} V=1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/var/{lib,log}/iptraf-ng
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	V=1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
